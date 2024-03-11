@@ -15,6 +15,9 @@ void clear_screen() {
 void clear (void){
     while ( getchar() != '\n' );
 }
+
+/// string to lower
+/// @param str string
 void modify_string(char * str) {
     while ( * str != '\0') {
         * str = tolower( * str);
