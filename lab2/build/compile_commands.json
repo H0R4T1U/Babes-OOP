@@ -1,0 +1,26 @@
+[
+{
+  "directory": "/home/h/code/Babes-OOP/lab2/build",
+  "command": "/usr/bin/gcc   -g -std=gnu11 -o CMakeFiles/lab2.dir/main.c.o -c /home/h/code/Babes-OOP/lab2/main.c",
+  "file": "/home/h/code/Babes-OOP/lab2/main.c",
+  "output": "CMakeFiles/lab2.dir/main.c.o"
+},
+{
+  "directory": "/home/h/code/Babes-OOP/lab2/build",
+  "command": "/usr/bin/gcc   -g -std=gnu11 -o CMakeFiles/lab2.dir/Domain/medicament.c.o -c /home/h/code/Babes-OOP/lab2/Domain/medicament.c",
+  "file": "/home/h/code/Babes-OOP/lab2/Domain/medicament.c",
+  "output": "CMakeFiles/lab2.dir/Domain/medicament.c.o"
+},
+{
+  "directory": "/home/h/code/Babes-OOP/lab2/build",
+  "command": "/usr/bin/gcc   -g -std=gnu11 -o CMakeFiles/lab2.dir/Validator/validator.c.o -c /home/h/code/Babes-OOP/lab2/Validator/validator.c",
+  "file": "/home/h/code/Babes-OOP/lab2/Validator/validator.c",
+  "output": "CMakeFiles/lab2.dir/Validator/validator.c.o"
+},
+{
+  "directory": "/home/h/code/Babes-OOP/lab2/build",
+  "command": "/usr/bin/gcc   -g -std=gnu11 -o CMakeFiles/lab2.dir/Domain/lista.c.o -c /home/h/code/Babes-OOP/lab2/Domain/lista.c",
+  "file": "/home/h/code/Babes-OOP/lab2/Domain/lista.c",
+  "output": "CMakeFiles/lab2.dir/Domain/lista.c.o"
+}
+]
