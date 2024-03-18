@@ -14,6 +14,9 @@ void test_all() {
 }
 
 void test_domain() {
+    //TEST NULL
+    Medicament* a = NULL;
+    assert(reallocMedicament(&a,10000000000) == 0);
     Medicament m = createMedicament(1,"asdf",2.5,30);
     Medicament m3 = createMedicament(2, "hfg",2, 30);
     Medicament m1 = createMedicament(1, "", 2.5, 30);

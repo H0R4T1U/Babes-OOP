@@ -7,7 +7,7 @@
 #include "medicament.h"
 
 typedef struct {
-    Medicament medicamente[100];
+    Medicament* medicamente;
     int len;
 }Lista;
 

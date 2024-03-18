@@ -3,6 +3,9 @@
 //
 #define _CRT_SECURE_NO_WARNINGS
 #include "medicament.h"
+
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 /// Getter id
@@ -66,3 +69,22 @@ Medicament createMedicament(int id, char* nume,float concentratie,int cantitate)
 
     return m;
 }
+
+Medicament* allocateMedicament() {
+    //alocates account array
+    struct Medicament* a =  (struct Medicament*)malloc(1*sizeof( Medicament));
+    return a;
+
+}
+int reallocMedicament(Medicament** a,int n) {
+    //reallocates accounts array by 1
+    n++;
+    *a = (struct Medicament*)realloc(*a,n*sizeof(Medicament));
+    if(*a == NULL) {
+
+        return 0;
+    }
+    return n;
+
+}
+
