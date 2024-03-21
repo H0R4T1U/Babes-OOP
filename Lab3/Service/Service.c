@@ -4,7 +4,6 @@
 
 #include "Service.h"
 
-#include <stdio.h>
 
 /// 
 /// @param list Lista de medicamente
@@ -79,40 +78,38 @@ int delete_all_stock(Lista* list,int id) {
 /// @param nume flag:daca este  setat sorteaza dupa nume
 /// @param cantitate flag: daca este setat sorteaza dupa cantitate
 /// @param crescator flag; daca este setat sorteaza crescator
-void sort(Lista* list, int nume, int cantitate,int crescator) {
-    
-    int len = get_len(list);
-    if(cantitate) {
-        for(int k = 0; k<= len; k++ ) {
-            for(int i = 0; i< len-1;i++) {
-                if(crescator) {
-                    if(get_cantitate(&list->medicamente[i]) > get_cantitate(&list->medicamente[i+1])) {
-                        listswap(list,i,i+1);
-                    }
-                }else {
-                    if(get_cantitate(&list->medicamente[i]) < get_cantitate(&list->medicamente[i+1])) {
-                        listswap(list,i,i+1);
-                    }
-                }
-            }
-
-        }
+int nume_cresc(Medicament* m1,Medicament* m2) {
+    if(strcmp(get_nume(m1), get_nume(m2)) >=1) {
+        return 1;
     }
-    if(nume) {
-        for(int k = 0 ;k <= len; k++) {
-            for(int i = 0; i < len-1;i++) {
-                if(crescator) {
-                    if(strcmp(get_nume(&list->medicamente[i]), get_nume(&list->medicamente[i+1])) >=1) {
-                        listswap(list,i,i+1);
-                    }
-                }else {
-                    if(strcmp(get_nume(&list->medicamente[i]), get_nume(&list->medicamente[i+1])) <=1) {
-                        listswap(list,i,i+1);
-                    }
-                }
+    return 0;
+}
+int nume_descresc(Medicament* m1,Medicament* m2){
+    if(strcmp(get_nume(m1), get_nume(m2)) <=1) {
+        return 1;
+    }
+    return 0;
+}
+int cantitate_crescator(Medicament* m1,Medicament* m2) {
+    if(get_cantitate(m1) > get_cantitate(m2)) {
+        return 1;
+    }
+    return 0;
+}
+int cantitate_descrescator(Medicament* m1, Medicament* m2) {
+    if(get_cantitate(m1) < get_cantitate(m2)) {
+        return 1;
+    }
+    return 0;
+}
+void sort(Lista* list, int (*functie)(Medicament* m1,Medicament* m2)) {
+    int len = get_len(list);
+    for(int k = 0; k<= len; k++ ) {
+        for(int i = 0; i< len-1;i++) {
+            if(functie(&list->medicamente[i],&list->medicamente[i+1])) {
+                listswap(list,i,i+1);
             }
         }
-
     }
 }
 
@@ -122,6 +119,7 @@ void sort(Lista* list, int nume, int cantitate,int crescator) {
 /// @return o lista de medicamente filtrata
 Lista filter_cantitate(Lista* list, int cantitate) {
     Medicament * meds = get_medicamente(list);
+
     Lista filtrate = createLista();
     int len = get_len(list);
     for(int i = 0 ; i<len;i++) {

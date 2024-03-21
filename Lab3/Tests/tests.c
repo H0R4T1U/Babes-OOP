@@ -16,7 +16,8 @@ void test_all() {
 void test_domain() {
     //TEST NULL
     Medicament* a = NULL;
-    assert(reallocMedicament(&a,10000000000) == 0);
+    assert(reallocMedicament(&a,1410065408) == 0);
+    free(a);
     Medicament m = createMedicament(1,"asdf",2.5,30);
     Medicament m3 = createMedicament(2, "hfg",2, 30);
     Medicament m1 = createMedicament(1, "", 2.5, 30);
@@ -40,6 +41,7 @@ void test_domain() {
     pop(&l, 1);
     assert(get_len(&l) == 1);
     pop(&l, 7);
+    assert(destructor(&l) == 1);
 }
 
 void test_service() {
@@ -73,21 +75,23 @@ void test_service() {
     add_medicament(&l,4,"Antibiotic",87.5,21);
 
     assert(strcmp(get_nume(&l.medicamente[0]),"Ibuprofen") == 0);
-    sort(&l,1,0,1);
+    sort(&l,nume_cresc);
     assert(strcmp(get_nume(&l.medicamente[0]),"Antibiotic") == 0);
     assert(get_cantitate(&l.medicamente[0]) == 21);
-    sort(&l,0,1,1);
+    sort(&l,cantitate_crescator);
     assert(get_cantitate(&l.medicamente[0]) == 0);
-    sort(&l,0,1,0);
+    sort(&l,cantitate_descrescator);
     assert(get_cantitate(&l.medicamente[0]) == 50);
-    sort(&l,1,0,0);
+    sort(&l,nume_descresc);
     assert(strcmp(get_nume(&l.medicamente[0]),"Penicilina") == 0);
     //FILTRARI
     Lista filtrate = filter_cantitate(&l,25);
     assert(get_len(&filtrate) == 2);
+    destructor(&filtrate);
     filtrate = filter_initiala(&l,'N');
     assert(get_len(&filtrate) == 1);
     assert(strcmp(get_nume(&filtrate.medicamente[0]),"Nurofen") == 0);
     modify_string(get_nume(&l.medicamente[0]));
-    
+    destructor(&l);
+    destructor(&filtrate);
 }

@@ -72,14 +72,14 @@ Medicament createMedicament(int id, char* nume,float concentratie,int cantitate)
 
 Medicament* allocateMedicament() {
     //alocates account array
-    struct Medicament* a =  (struct Medicament*)malloc(1*sizeof( Medicament));
+    Medicament*  a = (Medicament*)malloc(1*sizeof( Medicament));
     return a;
 
 }
 int reallocMedicament(Medicament** a,int n) {
     //reallocates accounts array by 1
     n++;
-    *a = (struct Medicament*)realloc(*a,n*sizeof(Medicament));
+    *a = ( Medicament*)realloc(*a,n*sizeof(Medicament));
     if(*a == NULL) {
 
         return 0;

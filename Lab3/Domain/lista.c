@@ -72,3 +72,8 @@ void listswap(Lista* list,int index1,int index2) {
     list->medicamente[index1] = list->medicamente[index2];
     list->medicamente[index2] = med;
 }
+
+int destructor(Lista* list) {
+    free(list->medicamente);
+    return 1;
+}

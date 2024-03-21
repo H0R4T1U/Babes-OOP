@@ -5,6 +5,7 @@
 #ifndef LISTA_H
 #define LISTA_H
 #include "medicament.h"
+#include <stdlib.h>
 
 typedef struct {
     Medicament* medicamente;
@@ -18,5 +19,5 @@ void push(Lista* lista,Medicament medicament);
 void pop(Lista* lista,int id);
 void listswap(Lista* list,int index1,int index2);
 Lista createLista();
-
+int destructor(Lista* list);
 #endif //LISTA_H

@@ -20,8 +20,10 @@ void print_main_menu() {
 }
 void print_sortare_menu() {
     printf("Meniu Sortari\n");
-    printf("1.Sortare dupa nume\n");
-    printf("2. Sosrtare dupa cantitate\n");
+    printf("1.Sortare dupa nume crescator\n");
+    printf("2.Sortare dupa nume Descrescator\n");
+    printf("3. Sosrtare dupa cantitate Crescator\n");
+    printf("4. Sosrtare dupa cantitate Descrescator\n");
 }
 
 void print_cresc_menu() {
@@ -142,39 +144,28 @@ void afisare_lista(Lista* lista) {
 /// UI AFISARI CU SORTARI
 /// @param lista lista de medicamente
 void afisare_medicament_ui(Lista* lista) {
-    int nume=0,cantitate=0,ordine,loop=1;
-    char choice,crescator;
+    int loop=1;
+    char choice;
     print_sortare_menu();
     while(loop) {
-
 
         printf(":");
 
         choice = getchar();
         if(choice == '1') {
-            nume = 1;
+            sort(lista,nume_cresc);
             loop = 0;
         }else if(choice == '2') {
-            cantitate = 1;
+            sort(lista,nume_descresc);
+            loop = 0;
+        }else if(choice == '3') {
+            sort(lista,cantitate_crescator);
+            loop = 0;
+        }else if(choice == '4') {
+            sort(lista,cantitate_descrescator);
             loop = 0;
         }
     }
-    loop = 1;
-    print_cresc_menu();
-    while(loop) {
-
-        printf(":");
-
-        crescator = getchar();
-        if(crescator == '1') {
-            ordine = 1;
-            loop = 0;
-        }else if(crescator == '2') {
-            ordine = 0;
-            loop = 0;
-        }
-    }
-    sort(lista,nume,cantitate,ordine);
     afisare_lista(lista);
 
 }
@@ -193,6 +184,7 @@ void filtreaza_medicament_ui(Lista* lista) {
             scanf("%d",&cantitate);
             Lista list = filter_cantitate(lista,cantitate);
             afisare_lista(&list);
+            destructor(&list);
             loop = 0;
         }else if(choice == '2') {
             char initiala;
@@ -201,6 +193,7 @@ void filtreaza_medicament_ui(Lista* lista) {
             initiala = tolower(getchar());
             Lista list = filter_initiala(lista,initiala);
             afisare_lista(&list);
+            destructor(&list);
             loop = 0;
         }
     }
