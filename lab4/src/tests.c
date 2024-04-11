@@ -37,7 +37,7 @@ void repoTests() {
     Participant *p1 = createParticipant(p1FirstName, p1LastName, p1Score);
     Participant *p2 = createParticipant(p2FirstName, p2LastName, p2Score);
 
-    List *myList = creeazaVid(destroyParticipant);
+    List *myList = creeazaVid((DestroyFct) destroyParticipant);
 
     // Add
     adauga(myList, p1);
@@ -100,7 +100,7 @@ void serviceTests() {
 
     const char *badName = "Nom32";
 
-    Manager* manager = managerInnit(destroyParticipant,destroyList);
+    Manager* manager = managerInnit((void (*)(ElemType)) destroyParticipant, (void (*)(ElemType)) destroyList);
     assert(undo(manager) == 1);
     // Add
     assert(managerAddParticipant(manager, p1FirstName, p1LastName, p1Score) == 1);

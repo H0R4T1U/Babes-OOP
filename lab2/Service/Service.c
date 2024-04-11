@@ -4,7 +4,7 @@
 
 #include "Service.h"
 
-#include <stdio.h>
+\
 
 /// 
 /// @param list Lista de medicamente
@@ -102,11 +102,11 @@ void sort(Lista* list, int nume, int cantitate,int crescator) {
         for(int k = 0 ;k <= len; k++) {
             for(int i = 0; i < len-1;i++) {
                 if(crescator) {
-                    if(strcmp(get_nume(&list->medicamente[i]), get_nume(&list->medicamente[i+1])) >=1) {
+                    if(strcmp(get_nume(&list->medicamente[i]), get_nume(&list->medicamente[i+1])) >0) {
                         listswap(list,i,i+1);
                     }
                 }else {
-                    if(strcmp(get_nume(&list->medicamente[i]), get_nume(&list->medicamente[i+1])) <=1) {
+                    if(strcmp(get_nume(&list->medicamente[i]), get_nume(&list->medicamente[i+1])) < 0) {
                         listswap(list,i,i+1);
                     }
                 }

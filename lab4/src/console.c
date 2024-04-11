@@ -108,7 +108,7 @@ void uiFilterParticipantsByScore(Manager *manager) {
 void uiFilterParticipantsByInitial(Manager *manager) {
     char initial = 0;
 
-    printf("Enter the min score you what to filter by: ");
+    printf("Enter the initial  you what to filter by: ");
     scanf("%1s",&initial);
 
     List *filteredList = managerFilterParticipantsByInitial(manager->participanti, initial);
@@ -187,7 +187,7 @@ void uiSortParticipantsByName(Manager *manager) {
 }
 
 void consoleRun() {
-    Manager *manager = managerInnit(destroyParticipant,destroyList);
+    Manager *manager = managerInnit((void (*)(ElemType)) destroyParticipant, (void (*)(ElemType)) destroyList);
     printMenu();
     while (1) {
         int option;

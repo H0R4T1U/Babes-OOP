@@ -25,7 +25,7 @@ Fiecare medicament din stoc are un cod unic, un nume,concentratie, cantitate dis
 Creati o aplicatie care permite:
  a) Adaugare de noi medicamente. Daca medicamentul este deja in stoc trebuie actualizat cantitatea
  b) Actualizare medicamente (modificare nume, concentratie pentru un medicament din stoc)
- c) Stergerea intregului stoc dintr-un medicament dat
+ c) Stergerea intregului zstoc dintr-un medicament dat
  d) Vizualizare medicamente din stoc, ordonat dupa nume, cantitate (crescator/descrescator)
  e) Vizualizare lista de medicamente filtrate dupa un criteriu. Medicamente unde stocul disponibil este
 mai mic decat o valoare data; medicamente cu numele incepand cu o litera data.

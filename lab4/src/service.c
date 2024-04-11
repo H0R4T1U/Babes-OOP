@@ -32,7 +32,7 @@ int managerAddParticipant(Manager *manager, const char *firstName, const char *l
         !isValidScore(score) || poz != -1) {
         return 0;
     }
-    List* toUndo = copyList(manager->participanti,copyParticipant);
+    List* toUndo = copyList(manager->participanti, (CopyFct) copyParticipant);
     Participant *participant = createParticipant(firstName, lastName, score);
     adauga(manager->participanti, participant);
     adauga(manager->undoList,toUndo);
@@ -46,7 +46,7 @@ int managerDeleteParticipant(Manager *manager, const char *firstName, const char
     }
 
 
-    List* toUndo = copyList(manager->participanti,copyParticipant);
+    List* toUndo = copyList(manager->participanti, (CopyFct) copyParticipant);
     Participant* p;
     p = sterge(manager->participanti,poz);
     destroyParticipant(p);
@@ -63,7 +63,7 @@ int managerUpdateParticipant(Manager *manager, const char *firstName, const char
     Participant* p = createParticipant(firstName,lastName,newScore);
 
 
-    List* toUndo = copyList(manager->participanti,copyParticipant);
+    List* toUndo = copyList(manager->participanti, (CopyFct) copyParticipant);
     p =  modifica(manager->participanti,poz,p);
     destroyParticipant(p);
     adauga(manager->undoList,toUndo);
@@ -71,7 +71,7 @@ int managerUpdateParticipant(Manager *manager, const char *firstName, const char
 }
 
 List *managerFilterParticipantsByScore(List *list, int minScore) {
-    List *output = creeazaVid(destroyParticipant);
+    List *output = creeazaVid((DestroyFct) destroyParticipant);
 
     for (int i = 0; i < lungime(list); ++i) {
         Participant* p = get(list,i);
@@ -83,7 +83,7 @@ List *managerFilterParticipantsByScore(List *list, int minScore) {
     return output;
 }
 List *managerFilterParticipantsByInitial(List *list, char initial) {
-    List *output = creeazaVid(destroyParticipant);
+    List *output = creeazaVid((DestroyFct) destroyParticipant);
     for (int i = 0; i < lungime(list); ++i) {
         Participant* p = get(list,i);
         if (getFirstName(p)[0] == initial) {
@@ -105,7 +105,7 @@ int byName(Participant *first, Participant *second) {
 
 
 List *managerSortParticipants(List *list, int (*cmp)(Participant *, Participant *),int reversed) {
-    List *l = copyList(list,copyParticipant);
+    List *l = copyList(list, (CopyFct) copyParticipant);
     int i, j;
     // selection sort
     for (i = 0; i < lungime(l); i++)
@@ -130,7 +130,7 @@ List *managerSortParticipants(List *list, int (*cmp)(Participant *, Participant 
 }
 List *managerBubbleSortParticipants(List* list, int (*cmpF)(Participant* c1, Participant* c2), int reversed){
     int b = 0;
-    List *l = copyList(list,copyParticipant);
+    List *l = copyList(list, (CopyFct) copyParticipant);
     while (b == 0)
     {
         b = 1;
