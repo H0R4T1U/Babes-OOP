@@ -1,0 +1,21 @@
+[2024-04-16 06:32:48] [info] Start Program:
+Path:"C:\Users\horat\source\repos\H0R4T1U\POO\Lab 7\x64\Debug\Lab 7.exe"
+Arguments:
+Working directory: "C:\Users\horat\source\repos\H0R4T1U\POO\Lab 7\Lab 7\"
+Modules: Selected: C:\Users\horat\source\repos\H0R4T1U\POO\Lab 7\x64\Debug\Lab 7.exe Excluded: 
+Sources: Selected: C:\Users\horat\source\repos\H0R4T1U\POO\Lab 7\Lab 7 Excluded: 
+Log Level: Normal
+Cover Children: 0
+Aggregate by file: 1
+Continue after C++ exception: 0
+Optimized build support: 0
+Export: Binary C:\Users\horat\AppData\Local\Temp\z2to30mc.gdy 
+Input coverage: 
+Unified diff: 
+Excluded line regular expressions: 
+Substitute pdb source paths: 
+
+[2024-04-16 06:32:48] [info] Module: C:\Users\horat\source\repos\H0R4T1U\POO\Lab 7\x64\Debug\Lab 7.exe is selected because it matches selected pattern: C:\Users\horat\source\repos\H0R4T1U\POO\Lab 7\x64\Debug\Lab 7.exe
+[2024-04-16 06:32:49] [info] ----------------------------------------------------
+[2024-04-16 06:32:49] [info] Coverage binary generated in file: C:\Users\horat\AppData\Local\Temp\z2to30mc.gdy
+[2024-04-16 06:32:49] [info] ----------------------------------------------------
