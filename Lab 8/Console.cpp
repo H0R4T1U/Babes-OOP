@@ -34,7 +34,8 @@ void DisciplinaConsole::printMenu()
 	cout << "9. Sortare dupa Ore.\n";
 	cout << "10. Sortare dupa Profesor+Tip.\n";
 	cout << "11. Meniul de creare contracte studiu.\n";
-	cout << "12. Iesire.\n";
+	cout << "12. Genereaza raport.\n";
+	cout << "13. Iesire.\n";
 }
 
 void DisciplinaConsole::addDisciplinaUI()
@@ -213,8 +214,8 @@ void populate(DisciplinaService& dS)
 	dS.addDisciplina("ASC", 15, "frecventa", "Vancea");
 	dS.addDisciplina("OOP", 20, "frecventa", "ISTVAN");
 	dS.addDisciplina("POO", 30, "frecventa", "ISTVAN");
-	dS.addDisciplina("AG", 5, "frecventa", "Suciu");
-	dS.addDisciplina("Analiza", 100, "frecventa", "Berinde");
+	dS.addDisciplina("AG", 5, "fara frecventa", "Suciu");
+	dS.addDisciplina("Analiza", 100, "fara frecventa", "Berinde");
 }
 void DisciplinaConsole::emptyContractList()
 {
@@ -251,9 +252,16 @@ void DisciplinaConsole::generateContractList()
 		cout << err.getMessage();
 	}
 }
+void DisciplinaConsole::generateReport()
+{
+	map<string, int> rep = service.report();
+	for (auto pr : rep)
+		cout << pr.first << ' ' << pr.second << '\n';
+}
 void DisciplinaConsole::start()
 {
 	int option;
+	populate(service);
 	while (true)
 	{
 
@@ -297,9 +305,13 @@ void DisciplinaConsole::start()
 					emptyContractList();
 				else if (contractOption == 2)
 					addToContractList();
+				else if (contractOption == 3)
+					generateContractList();
 				else break;
 			}
 		}
+		else if (option == 12)
+			generateReport();
 		else break;
 
 	}

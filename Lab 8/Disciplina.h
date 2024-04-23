@@ -48,7 +48,7 @@ public:
     }
 
     Disciplina(const Disciplina& ot) : denumire{ ot.denumire }, ore{ ot.ore }, tip{ ot.tip }, profesor{ ot.profesor } {
-        cout << "";
+        cout << "*\n";
     }
     // operator assignment
         // copiaza Disciplina din disciplina in this

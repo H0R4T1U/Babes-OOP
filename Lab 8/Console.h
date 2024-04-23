@@ -38,7 +38,7 @@ private:
 
     // genereaza aleatoriu lista de discipline 
     void generateContractList();
-
+    void generateReport();
 public:
     explicit DisciplinaConsole(DisciplinaService& dS,ContractService& cS) : service{ dS }, contractService{ cS } {};
     DisciplinaConsole(const DisciplinaConsole& dS) = delete;

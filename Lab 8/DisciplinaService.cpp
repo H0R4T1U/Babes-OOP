@@ -127,7 +127,19 @@ vector<Disciplina> DisciplinaService::sortByProfesorTip(const char& mode) const
     return sortedList;
 
 }
-
+map<string, int> DisciplinaService::report() const
+{
+	map<string, int> report;
+	for (auto& d : getDisciplineList())
+	{
+		auto it = report.find(d.getTip());
+		if (it != report.end())
+			report[d.getTip()]++;
+		else
+			report.insert(pair<string, int>(d.getTip(), 1));
+	}
+	return report;
+}
 void ContractService::addDisciplina(const string& denumire)
 {
 	if (validateDenumire(denumire) == 0)
@@ -347,6 +359,8 @@ void testService()
 	{
 		assert(error.getMessage() == "Mod de sortare invalid!\n");
 	}
+	map<string, int>mp = service.report();
+	assert(mp["FRECVENTA"] == 4);
 	// testam functionalitatile clasei contractService
 	ContractService contractService{ service };
 	assert(contractService.contractSize() == 0);
