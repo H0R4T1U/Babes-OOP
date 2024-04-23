@@ -36,7 +36,7 @@ public:
 
 	// sortare dupa producator + model
 	vector<Disciplina> sortByProfesorTip(const char& mode) const;
-
+	map<string, int> report() const;
 };
 class ContractService
 {
