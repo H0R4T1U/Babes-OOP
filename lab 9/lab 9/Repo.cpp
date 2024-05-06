@@ -32,7 +32,7 @@ size_t Repo::size() const
 {
     return all.size();
 }
-const vector<Disciplina>& Repo::getAll() const noexcept {
+const vector<Disciplina> Repo::getAll() const  {
     return all;
 }
 
@@ -70,4 +70,50 @@ void testRepo()
     position = repo.find("AG");
 
     assert(position == -1);
+	// incercam sa adaugam o masina 
+	MapRepo maprepo{ 0.2F };
+	try
+	{
+		maprepo.store(testDisciplina1);
+	}
+	catch (const float& prob)
+	{
+		assert(prob == 0.2F);
+	}
+
+	try
+	{
+		maprepo.store(testDisciplina3);
+	}
+	catch (const float& prob)
+	{
+		assert(prob == 0.2F);
+	}
+
+	try
+	{
+		maprepo.modify(0, testDisciplina2);
+	}
+	catch (const float& prob)
+	{
+		assert(prob == 0.2F);
+	}
+
+	try
+	{
+		maprepo.remove(0);
+	}
+	catch (const float& prob)
+	{
+		assert(prob == 0.2F);
+	}
+
+	__int64 pos;
+	pos = maprepo.find("Geografie");
+	assert(pos == -1);
+	pos = maprepo.find("OS");
+	assert(pos == 1);
+	assert(maprepo.size() == 1);
+	assert(maprepo.getAll().at(0).getDenumire() == "OS");
+
 }

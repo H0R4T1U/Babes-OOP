@@ -13,11 +13,12 @@ int main() {
     testDomain();
     testRepo();
     testService();
-    Repo repo;
+    //Repo repo;
+    MapRepo repo{ 0.2f };
     Repo contractRepo;
     DisciplinaService service{ repo,contractRepo };
     DisciplinaConsole console{ service };
-    console.start();
+    //console.start();
     _CrtDumpMemoryLeaks();
     return 0;
 }

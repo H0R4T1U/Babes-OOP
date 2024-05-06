@@ -18,11 +18,11 @@ class UndoAdd : public UndoAction
 	Disciplina addedDisciplina;
 
 	// repository-ul de masini
-	Repo& repo;
+	AbstractRepo& repo;
 
 public:
 	// constructorul clasei
-	UndoAdd(Repo& repo, const  Disciplina& d) : repo{ repo }, addedDisciplina{ d } {}
+	UndoAdd(AbstractRepo& repo, const  Disciplina& d) : repo{ repo }, addedDisciplina{ d } {}
 
 	// metoda pentru executarea operatiei de undo
 	void doUndo() override
@@ -38,11 +38,11 @@ class UndoRemove : public UndoAction
 	Disciplina deletedDisciplina;
 
 	// repository-ul de masini
-	Repo& repo;
+	AbstractRepo& repo;
 
 public:
 	// constructorul clasei
-	UndoRemove(Repo& repo, const  Disciplina& d) : repo{ repo }, deletedDisciplina{ d } {}
+	UndoRemove(AbstractRepo& repo, const  Disciplina& d) : repo{ repo }, deletedDisciplina{ d } {}
 
 	// metoda pentru executarea operatiei de undo
 	void doUndo() override
@@ -58,11 +58,11 @@ class UndoModify : public UndoAction
 	Disciplina newDisciplina;
 
 	// repository-ul de masini
-	Repo& repo;
+	AbstractRepo& repo;
 
 public:
 	// constructorul clasei
-	UndoModify(Repo& repo, const  Disciplina& oldD, const Disciplina& newD) : repo{ repo }, oldDisciplina{ oldD }, newDisciplina{ newD } {}
+	UndoModify(AbstractRepo& repo, const  Disciplina& oldD, const Disciplina& newD) : repo{ repo }, oldDisciplina{ oldD }, newDisciplina{ newD } {}
 
 	// metoda pentru executarea operatiei de undo
 	void doUndo() override

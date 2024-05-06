@@ -11,15 +11,15 @@
 #include<map>
 #include "undo.h"
 class DisciplinaService {
-	Repo& rep;
+	AbstractRepo& rep;
 	Repo& contractRepo;
 	vector<unique_ptr<UndoAction>> undoActions;
 
 
 public:
-	DisciplinaService(Repo& r, Repo& cR)  noexcept :rep{ r }, contractRepo{cR} {};
+	DisciplinaService(AbstractRepo& r, Repo& cR)  noexcept :rep{ r }, contractRepo{cR} {};
 	DisciplinaService(const DisciplinaService& dS) = delete;
-	const vector<Disciplina>& getDisciplineList()const;
+	const vector<Disciplina> getDisciplineList()const;
 	void addDisciplina(const string& denumire, int ore, const string& tip, const string& profesor);
 	void modifyDisciplina(const string& denumire, const string& new_denumire, int ore, const string& tip, const string& profesor);
 	void deleteDisciplina(const string& denumire);

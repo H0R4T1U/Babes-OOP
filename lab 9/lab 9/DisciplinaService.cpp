@@ -19,8 +19,16 @@ void DisciplinaService::addDisciplina(const string& denumire, int ore, const str
 	if (validateDisciplina(denumire, ore, tip, profesor) == 0)
 		throw InvalidDisciplinaError("Datele disciplinei sunt invalide\n");
 	Disciplina d{ denumire,ore,tip,profesor };
-	rep.store(d);
-	undoActions.push_back(make_unique<UndoAdd>(rep, d));
+	try {
+		rep.store(d);
+		undoActions.push_back(make_unique<UndoAdd>(rep, d));
+	}
+	catch (const float& prob)
+	{
+		cout << "Probabilitatea este: " << prob << endl;
+		undoActions.push_back(make_unique<UndoAdd>(rep, d));
+	}
+	
 }
 
 void DisciplinaService::deleteDisciplina(const string& denumire) {
@@ -28,7 +36,15 @@ void DisciplinaService::deleteDisciplina(const string& denumire) {
 	if (position < 0)
 		throw InexistentDisciplinaError("disciplina nu exista in baza de date!\n");
 	undoActions.push_back(make_unique<UndoRemove>(rep, rep.getAll().at(position)));
-	rep.remove(position);
+	try
+	{
+		rep.remove(position);
+	}
+
+	catch (const float& prob)
+	{
+		cout << "Probabilitatea este: " << prob << endl;
+	}
 
 }
 
@@ -41,15 +57,30 @@ void DisciplinaService::modifyDisciplina(const string& denumire, const string& n
 		throw InvalidDisciplinaError("Datele disciplinei sunt invalide!\n");
 	Disciplina d{ new_Denumire,ore,tip,profesor };
 	undoActions.push_back(make_unique<UndoModify>(rep, rep.getAll().at(position), d));
-	rep.modify(position, d);
+	try
+	{
+		rep.modify(position, d);
+	}
+
+	catch (const float& prob)
+	{
+		cout << "Probabilitatea este: " << prob << endl;
+	}
 
 }
 void DisciplinaService::undo()
 {
 	if (undoActions.empty())
 		throw EmptyListError("Nu mai exista operatii la care sa executam undo!\n");
-	undoActions.back()->doUndo();
-	undoActions.pop_back();
+	try
+	{
+		undoActions.back()->doUndo();
+	}
+	catch (const float& prob)
+	{
+		cout << "Probabilitatea este: " << prob << endl;
+		undoActions.pop_back();
+	}
 }
 Disciplina DisciplinaService::findDisciplina(const string& denumire) const {
 	const int position = rep.find(denumire);
@@ -59,7 +90,7 @@ Disciplina DisciplinaService::findDisciplina(const string& denumire) const {
 	return getDisciplineList().at(position);
 }
 
-const vector<Disciplina>& DisciplinaService::getDisciplineList() const {
+const vector<Disciplina> DisciplinaService::getDisciplineList() const {
 	return rep.getAll();
 }
 size_t DisciplinaService::listSize() const {
@@ -70,7 +101,8 @@ vector<Disciplina> DisciplinaService::filterByOre(int ore) const
 {
 
 	vector<Disciplina> filteredList;
-	copy_if(getDisciplineList().begin(), getDisciplineList().end(), back_inserter(filteredList), [ore](const Disciplina& d) { return d.getOre() == ore; });
+	auto& all = rep.getAll();
+	copy_if(all.begin(), all.end(), back_inserter(filteredList), [ore](const Disciplina& d) { return d.getOre() == ore; });
 
 	if (filteredList.empty()) {
 		throw EmptyListError("Nu exista discipline de acest tip in baza de date! \n");
@@ -81,7 +113,8 @@ vector<Disciplina> DisciplinaService::filterByOre(int ore) const
 vector<Disciplina> DisciplinaService::filterByProfesor(const string& profesor) const
 {
 	vector<Disciplina> filteredList;
-	copy_if(getDisciplineList().begin(), getDisciplineList().end(), back_inserter(filteredList), [profesor](const Disciplina& d) { return d.getProfesor() == profesor; });
+	auto& all = rep.getAll();
+	copy_if(all.begin(), all.end(), back_inserter(filteredList), [profesor](const Disciplina& d) { return d.getProfesor() == profesor; });
 
 	if (filteredList.empty()) {
 		throw EmptyListError("Nu exista discipline de acest tip in baza de date! \n");
@@ -493,4 +526,24 @@ void testService()
 	ifstream inHTML("test.html");
 	inHTML >> testString;
 	assert(testString == "<html><body>");
+	// construim un maprepo si un mapservice
+	MapRepo maprepo{ 0.2F };
+	DisciplinaService mapservice{ maprepo, contractRepo };
+
+	// adaugam o masina
+	mapservice.addDisciplina("ASC", 30, "FRECV", "VANCEA");
+	assert(mapservice.listSize() == 1);
+
+	// executam undo
+	mapservice.undo();
+	assert(mapservice.listSize() == 0);
+
+	// adaugam din nou masina
+	mapservice.addDisciplina("ASC", 30, "FRECV", "VANCEA");
+	assert(mapservice.listSize() == 1);
+
+	// modificam si apoi stergem masina
+	mapservice.modifyDisciplina("ASC", "FP", 45, "FRECV", "ISTVAN");
+	mapservice.deleteDisciplina("FP");
+	assert(mapservice.listSize() == 0);
 }
