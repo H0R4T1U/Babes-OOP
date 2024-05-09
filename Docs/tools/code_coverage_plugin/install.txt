@@ -1,0 +1,8 @@
+Install cpp code coverage plugin into vs 2022
+stop Visual Studio 2022
+unzip
+execute: VSPackage.vsix
+
+start Visual Studio 2022
+new menu item: right click on project->Run OpenCppCoverage
+
