@@ -1,0 +1,8 @@
+//
+// Created by horatiu on 6/15/24.
+//
+
+#ifndef URGENTA_TABLE_MODEL_HEADER_H
+#define URGENTA_TABLE_MODEL_HEADER_H
+
+#endif //URGENTA_TABLE_MODEL_HEADER_H
